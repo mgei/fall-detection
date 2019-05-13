@@ -1,3 +1,17 @@
+# Lightweight fall detection based on human pose estimation
+
+The goal is to be able to deploy it on a Raspberry 3 Model B+ with a webcam and an [Intel® Neural Compute Stick 2](https://software.intel.com/en-us/neural-compute-stick). It should push a warning on other devices if a person has fallen. In a further step, it is planned to create a web video surveillance dashboard, and having several live streams including pose estimation from several Raspberries.
+
+This repository is based on [PINTO0309/MobileNetV2-PoseEstimation](https://github.com/PINTO0309/MobileNetV2-PoseEstimation) which itself is based on [ildoonet/tf-pose-estimation](https://github.com/ildoonet/tf-pose-estimation).
+
+An interesting and simple approach using the Y-axis movement of the head position to detect falls: https://github.com/reigngt09/Pose-Estimation/tree/master/3.%20Fall%20Detection 
+
+We hope that performance will be sufficient to work with these models, else we would have to go for more simpler models.
+
+---
+
+*Original README follows:*
+
 # MobileNetV2-PoseEstimation
 **[Caution] The behavior of RraspberryPi+NCS2 is very unstable.**  
 **[Caution] The behavior of Tensorflow Lite+CPU is unstable.**  
