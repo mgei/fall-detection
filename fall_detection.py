@@ -14,7 +14,22 @@ try:
     from armv7l.openvino.inference_engine import IENetwork, IEPlugin
 except:
     from openvino.inference_engine import IENetwork, IEPlugin
+import logging
 
+logging.warning('logging loaded')
+
+logger = logging.getLogger('falldet')
+# setLevel: lowest-severity log message a logger will handle, debug is the lowest,  critical is the highest built-in severity
+logger.setLevel(logging.DEBUG) 
+# create console handler and set level to debug
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+# create formatter
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# add formatter to ch
+ch.setFormatter(formatter)
+# add ch to logger
+logger.addHandler(ch)
 
 def getKeypoints(probMap, threshold=0.1):
 
@@ -220,24 +235,32 @@ try:
 
             detected_keypoints.append(keypoints_with_id)
 
-        print(detected_keypoints)
+        #print(detected_keypoints)
         
         frameClone = np.uint8(canvas.copy())
-        for i in range(nPoints):
-            for j in range(len(detected_keypoints[i])):
-                cv2.circle(frameClone, detected_keypoints[i][j][0:2], 5, colors[i], -1, cv2.LINE_AA)
+        #for i in range(nPoints):
+        #    for j in range(len(detected_keypoints[i])):
+        #        cv2.circle(frameClone, detected_keypoints[i][j][0:2], 20, colors[i], -1, cv2.LINE_AA)
 
+        # nose keypoint only
+        if detected_keypoints[0]: # is there even the nose visible
+            cv2.circle(frameClone, detected_keypoints[0][0][0:2], 20, colors[0], -1, cv2.LINE_AA)
+        
+        if detected_keypoints[1]:
+            print('neck position:', detected_keypoints[1])
+         
         valid_pairs, invalid_pairs = getValidPairs(outputs, w, h)
         personwiseKeypoints = getPersonwiseKeypoints(valid_pairs, invalid_pairs)
-
-        for i in range(17):
-            for n in range(len(personwiseKeypoints)):
-                index = personwiseKeypoints[n][np.array(POSE_PAIRS[i])]
-                if -1 in index:
-                    continue
-                B = np.int32(keypoints_list[index.astype(int), 0])
-                A = np.int32(keypoints_list[index.astype(int), 1])
-                cv2.line(frameClone, (B[0], A[0]), (B[1], A[1]), colors[i], 3, cv2.LINE_AA)
+        
+        ## show edges (skeleton)
+        #for i in range(17):
+        #    for n in range(len(personwiseKeypoints)):
+        #        index = personwiseKeypoints[n][np.array(POSE_PAIRS[i])]
+        #        if -1 in index:
+        #            continue
+        #        B = np.int32(keypoints_list[index.astype(int), 0])
+        #        A = np.int32(keypoints_list[index.astype(int), 1])
+        #        cv2.line(frameClone, (B[0], A[0]), (B[1], A[1]), colors[i], 3, cv2.LINE_AA)
 
         cv2.putText(frameClone, fps, (w-170,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
 
