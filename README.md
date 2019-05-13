@@ -8,6 +8,10 @@ An interesting and simple approach using the Y-axis movement of the head positio
 
 We hope that performance will be sufficient to work with these models, else we would have to go for more simpler models.
 
+## Notes
+
+* Installing *numba* on Raspberry: https://github.com/numba/numba/issues/3670#issuecomment-476071328
+
 ---
 
 *Original README follows:*
