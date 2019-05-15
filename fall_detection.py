@@ -11,6 +11,7 @@ import re
 import argparse
 import platform
 try:
+    #from armv7l.openvino.inference_engine import IENetwork, IEPlugin
     from armv7l.openvino.inference_engine import IENetwork, IEPlugin
 except:
     from openvino.inference_engine import IENetwork, IEPlugin

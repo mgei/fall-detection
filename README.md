@@ -8,13 +8,20 @@ An interesting and simple approach using the Y-axis movement of the head positio
 
 We hope that performance will be sufficient to work with these models, else we would have to go for more simpler models.
 
+Run on Movidius stick:
+
+```
+python3 fall_detection.py -d MYRIAD -b True
+```
+
 ## Notes
 
 * Installing *numba* on Raspberry: https://github.com/numba/numba/issues/3670#issuecomment-476071328
-
----
+* On Raspberry with Movidius 2.0 FPS, NCS2 2.3 FPS
 
 *Original README follows:*
+
+---
 
 # MobileNetV2-PoseEstimation
 **[Caution] The behavior of RraspberryPi+NCS2 is very unstable.**  
