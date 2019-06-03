@@ -133,6 +133,9 @@ time1 = 0
 camera_width = 320
 camera_height = 240
 
+# camera_width = 40 #80 #160 #320
+# camera_height = 30 #60 #120 #240
+
 keypointsMapping = ['Nose', 'Neck', 'R-Sho', 'R-Elb', 'R-Wr', 'L-Sho', 'L-Elb', 'L-Wr', 'R-Hip', 'R-Knee', 'R-Ank', 'L-Hip', 'L-Knee', 'L-Ank', 'R-Eye', 'L-Eye', 'R-Ear', 'L-Ear']
 POSE_PAIRS = [[1,2], [1,5], [2,3], [3,4], [5,6], [6,7], [1,8], [8,9], [9,10], [1,11], [11,12], [12,13], [1,0], [0,14], [14,16], [0,15], [15,17], [2,17], [5,16]]
 mapIdx = [[31,32], [39,40], [33,34], [35,36], [41,42], [43,44], [19,20], [21,22], [23,24], [25,26], [27,28], [29,30], [47,48], [49,50], [53,54], [51,52], [55,56], [37,38], [45,46]]
@@ -193,6 +196,8 @@ try:
         colh = color_image.shape[0]
         new_w = int(colw * min(w/colw, h/colh))
         new_h = int(colh * min(w/colw, h/colh))
+        # new_w = 184
+        #new_h = 216
 
         resized_image = cv2.resize(color_image, (new_w, new_h), interpolation = cv2.INTER_CUBIC)
         canvas = np.full((h, w, 3), 128)
